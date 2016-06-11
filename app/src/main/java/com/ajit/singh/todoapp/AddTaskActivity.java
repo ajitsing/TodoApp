@@ -2,6 +2,7 @@ package com.ajit.singh.todoapp;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 public class AddTaskActivity extends AppCompatActivity {
 
@@ -9,5 +10,9 @@ public class AddTaskActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_add_task);
+  }
+
+  public void done(View view) {
+    finish();
   }
 }

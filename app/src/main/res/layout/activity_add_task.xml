@@ -36,6 +36,7 @@
       android:layout_marginTop="50dp"
       android:background="@color/colorPrimary"
       android:text="Done"
+      android:onClick="done"
       android:textColor="@android:color/white"/>
   </LinearLayout>
 </LinearLayout>
