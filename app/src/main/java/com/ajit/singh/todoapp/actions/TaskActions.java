@@ -1,9 +1,9 @@
 package com.ajit.singh.todoapp.actions;
 
-import com.ajit.singh.todoapp.model.Task;
+import com.ajit.singh.todoapp.viewmodel.TaskViewModel;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface TaskActions {
-  void renderTasks(List<Task> tasks);
+  void renderTasks(ArrayList<TaskViewModel> tasks);
 }

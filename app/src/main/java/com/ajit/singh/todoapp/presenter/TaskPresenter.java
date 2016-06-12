@@ -3,7 +3,9 @@ package com.ajit.singh.todoapp.presenter;
 import com.ajit.singh.todoapp.actions.TaskActions;
 import com.ajit.singh.todoapp.model.Task;
 import com.ajit.singh.todoapp.repository.TaskRepository;
+import com.ajit.singh.todoapp.viewmodel.TaskViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskPresenter {
@@ -17,6 +19,10 @@ public class TaskPresenter {
 
   public void fetchTasks() {
     List<Task> tasks = this.repository.getTasks();
-    actions.renderTasks(tasks);
+    ArrayList<TaskViewModel> taskViewModels = new ArrayList<>();
+    for (Task task : tasks) {
+      taskViewModels.add(new TaskViewModel(task));
+    }
+    actions.renderTasks(taskViewModels);
   }
 }

@@ -8,11 +8,11 @@ import android.widget.ListView;
 
 import com.ajit.singh.todoapp.actions.TaskActions;
 import com.ajit.singh.todoapp.adapter.TasksAdapter;
-import com.ajit.singh.todoapp.model.Task;
 import com.ajit.singh.todoapp.presenter.TaskPresenter;
 import com.ajit.singh.todoapp.repository.TaskRepository;
+import com.ajit.singh.todoapp.viewmodel.TaskViewModel;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements TaskActions {
 
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements TaskActions {
   }
 
   @Override
-  public void renderTasks(List<Task> tasks) {
+  public void renderTasks(ArrayList<TaskViewModel> tasks) {
     ListView listView = (ListView) findViewById(R.id.tasks_list);
     listView.setAdapter(new TasksAdapter(tasks));
   }
