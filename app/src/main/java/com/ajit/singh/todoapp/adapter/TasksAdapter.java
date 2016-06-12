@@ -39,10 +39,12 @@ public class TasksAdapter extends BaseAdapter {
     View taskView = inflater.inflate(R.layout.task, viewGroup, false);
     TextView taskTitle = (TextView) taskView.findViewById(R.id.task_title);
     TextView taskDescription = (TextView) taskView.findViewById(R.id.task_description);
+    TextView creationDate = (TextView) taskView.findViewById(R.id.creation_date);
 
     Task task = tasks.get(position);
     taskTitle.setText(task.getTitle());
     taskDescription.setText(task.getDescription());
+    creationDate.setText(task.getCreationDate().toString());
     return taskView;
   }
 }

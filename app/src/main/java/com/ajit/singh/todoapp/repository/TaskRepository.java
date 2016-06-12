@@ -10,6 +10,7 @@ import com.ajit.singh.todoapp.model.Task;
 import com.ajit.singh.todoapp.table.TaskTable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TaskRepository {
@@ -32,7 +33,8 @@ public class TaskRepository {
     do {
       String title = cursor.getString(cursor.getColumnIndex(TaskTable.TITLE));
       String description = cursor.getString(cursor.getColumnIndex(TaskTable.DESCRIPTION));
-      tasks.add(new Task(title, description));
+      String creationDate = cursor.getString(cursor.getColumnIndex(TaskTable.CREATION_DATE));
+      tasks.add(new Task(title, description, new Date(creationDate)));
     } while (cursor.moveToNext());
 
     cursor.close();
@@ -45,6 +47,7 @@ public class TaskRepository {
     ContentValues contentValues = new ContentValues();
     contentValues.put(TaskTable.TITLE, task.getTitle());
     contentValues.put(TaskTable.DESCRIPTION, task.getDescription());
+    contentValues.put(TaskTable.CREATION_DATE, task.getCreationDate().toString());
 
     SQLiteDatabase database = taskDatabaseHelper.getWritableDatabase();
     database.insert(TaskTable.TABLE_NAME, null, contentValues);
