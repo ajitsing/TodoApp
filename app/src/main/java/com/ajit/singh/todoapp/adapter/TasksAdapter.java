@@ -40,7 +40,7 @@ public class TasksAdapter extends BaseAdapter {
     TextView taskTitle = (TextView) taskView.findViewById(R.id.task_title);
     TextView taskDescription = (TextView) taskView.findViewById(R.id.task_description);
 
-    Task task = tasks.get(0);
+    Task task = tasks.get(position);
     taskTitle.setText(task.getTitle());
     taskDescription.setText(task.getDescription());
     return taskView;

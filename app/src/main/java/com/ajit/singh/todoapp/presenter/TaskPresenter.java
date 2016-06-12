@@ -15,7 +15,7 @@ public class TaskPresenter {
     this.actions = actions;
   }
 
-  public void init() {
+  public void fetchTasks() {
     List<Task> tasks = this.repository.getTasks();
     actions.renderTasks(tasks);
   }

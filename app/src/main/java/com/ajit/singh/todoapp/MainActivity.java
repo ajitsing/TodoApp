@@ -16,21 +16,30 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements TaskActions {
 
+  private TaskPresenter presenter;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    TaskPresenter presenter = new TaskPresenter(new TaskRepository(this), this);
-    presenter.init();
+    presenter = new TaskPresenter(new TaskRepository(this), this);
+    presenter.fetchTasks();
   }
 
   public void addTask(View view) {
-    startActivity(new Intent(this, AddTaskActivity.class));
+    startActivityForResult(new Intent(this, AddTaskActivity.class), AddTaskActivity.ADD_TASK_REQ);
   }
 
   @Override
   public void renderTasks(List<Task> tasks) {
     ListView listView = (ListView) findViewById(R.id.tasks_list);
     listView.setAdapter(new TasksAdapter(tasks));
+  }
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (requestCode == AddTaskActivity.ADD_TASK_REQ) {
+      presenter.fetchTasks();
+    }
   }
 }

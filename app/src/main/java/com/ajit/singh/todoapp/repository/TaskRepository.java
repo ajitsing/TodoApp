@@ -1,7 +1,9 @@
 package com.ajit.singh.todoapp.repository;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.ajit.singh.todoapp.database.TaskDatabaseHelper;
 import com.ajit.singh.todoapp.model.Task;
@@ -20,14 +22,31 @@ public class TaskRepository {
   public List<Task> getTasks() {
     ArrayList<Task> tasks = new ArrayList<>();
     TaskDatabaseHelper taskDatabaseHelper = new TaskDatabaseHelper(context);
-    Cursor cursor = taskDatabaseHelper.getReadableDatabase().rawQuery(TaskTable.SElECT_QUERY, new String[]{});
-    cursor.moveToFirst();
+    Cursor cursor = taskDatabaseHelper.getWritableDatabase().rawQuery(TaskTable.SElECT_QUERY, null);
+
+    if (!cursor.moveToFirst()){
+      cursor.close();
+      return tasks;
+    }
+
     do {
       String title = cursor.getString(cursor.getColumnIndex(TaskTable.TITLE));
       String description = cursor.getString(cursor.getColumnIndex(TaskTable.DESCRIPTION));
       tasks.add(new Task(title, description));
     } while (cursor.moveToNext());
 
+    cursor.close();
     return tasks;
+  }
+
+  public void addTask(Task task) {
+    TaskDatabaseHelper taskDatabaseHelper = new TaskDatabaseHelper(context);
+
+    ContentValues contentValues = new ContentValues();
+    contentValues.put(TaskTable.TITLE, task.getTitle());
+    contentValues.put(TaskTable.DESCRIPTION, task.getDescription());
+
+    SQLiteDatabase database = taskDatabaseHelper.getWritableDatabase();
+    database.insert(TaskTable.TABLE_NAME, null, contentValues);
   }
 }
