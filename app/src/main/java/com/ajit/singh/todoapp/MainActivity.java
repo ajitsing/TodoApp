@@ -6,24 +6,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
 
-import com.ajit.singh.todoapp.actions.TaskActions;
 import com.ajit.singh.todoapp.adapter.TasksAdapter;
-import com.ajit.singh.todoapp.presenter.TaskPresenter;
-import com.ajit.singh.todoapp.repository.TaskRepository;
-import com.ajit.singh.todoapp.viewmodel.TaskViewModel;
+import com.ajit.singh.todoapp.database.repository.TaskRepository;
+import com.ajit.singh.todoapp.model.Task;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements TaskActions {
-
-  private TaskPresenter presenter;
+public class MainActivity extends AppCompatActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    presenter = new TaskPresenter(new TaskRepository(this), this);
-    presenter.fetchTasks();
+
+    fetchTasks();
   }
 
   public void addTask(View view) {
@@ -31,15 +27,16 @@ public class MainActivity extends AppCompatActivity implements TaskActions {
   }
 
   @Override
-  public void renderTasks(ArrayList<TaskViewModel> tasks) {
-    ListView listView = (ListView) findViewById(R.id.tasks_list);
-    listView.setAdapter(new TasksAdapter(tasks));
-  }
-
-  @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     if (requestCode == AddTaskActivity.ADD_TASK_REQ) {
-      presenter.fetchTasks();
+      fetchTasks();
     }
+  }
+
+  private void fetchTasks() {
+    List<Task> tasks = new TaskRepository(this).getTasks();
+
+    ListView listView = (ListView) findViewById(R.id.tasks_list);
+    listView.setAdapter(new TasksAdapter(tasks));
   }
 }

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.ajit.singh.todoapp.table.TaskTable;
+import com.ajit.singh.todoapp.database.table.TaskTable;
 
 public class TaskDatabaseHelper extends SQLiteOpenHelper {
   public TaskDatabaseHelper(Context context) {

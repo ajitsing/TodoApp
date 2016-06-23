@@ -1,5 +1,6 @@
 package com.ajit.singh.todoapp.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Task {
@@ -13,8 +14,8 @@ public class Task {
     this.creationDate = creationDate;
   }
 
-  public Date getCreationDate() {
-    return creationDate;
+  public String getCreationDate() {
+    return new SimpleDateFormat("EEE, d MMM yyyy HH:mm").format(creationDate);
   }
 
   public String getTitle() {

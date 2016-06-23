@@ -1,4 +1,4 @@
-package com.ajit.singh.todoapp.repository;
+package com.ajit.singh.todoapp.database.repository;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.ajit.singh.todoapp.database.TaskDatabaseHelper;
 import com.ajit.singh.todoapp.model.Task;
-import com.ajit.singh.todoapp.table.TaskTable;
+import com.ajit.singh.todoapp.database.table.TaskTable;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,7 +47,7 @@ public class TaskRepository {
     ContentValues contentValues = new ContentValues();
     contentValues.put(TaskTable.TITLE, task.getTitle());
     contentValues.put(TaskTable.DESCRIPTION, task.getDescription());
-    contentValues.put(TaskTable.CREATION_DATE, task.getCreationDate().toString());
+    contentValues.put(TaskTable.CREATION_DATE, task.getCreationDate());
 
     SQLiteDatabase database = taskDatabaseHelper.getWritableDatabase();
     database.insert(TaskTable.TABLE_NAME, null, contentValues);

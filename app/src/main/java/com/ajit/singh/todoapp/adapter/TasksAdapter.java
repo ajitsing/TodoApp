@@ -7,14 +7,14 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.ajit.singh.todoapp.R;
-import com.ajit.singh.todoapp.viewmodel.TaskViewModel;
+import com.ajit.singh.todoapp.model.Task;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class TasksAdapter extends BaseAdapter {
-  private ArrayList<TaskViewModel> tasks;
+  private List<Task> tasks;
 
-  public TasksAdapter(ArrayList<TaskViewModel> tasks) {
+  public TasksAdapter(List<Task> tasks) {
     this.tasks = tasks;
   }
 
@@ -45,9 +45,9 @@ public class TasksAdapter extends BaseAdapter {
     TextView taskDescription = (TextView) taskView.findViewById(R.id.task_description);
     TextView creationDate = (TextView) taskView.findViewById(R.id.creation_date);
 
-    TaskViewModel task = tasks.get(position);
+    Task task = tasks.get(position);
     taskTitle.setText(task.getTitle());
-    taskDescription.setText(task.getDetail());
+    taskDescription.setText(task.getDescription());
     creationDate.setText(task.getCreationDate());
     return taskView;
   }

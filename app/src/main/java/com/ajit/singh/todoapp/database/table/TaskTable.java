@@ -1,4 +1,4 @@
-package com.ajit.singh.todoapp.table;
+package com.ajit.singh.todoapp.database.table;
 
 import android.provider.BaseColumns;
 
