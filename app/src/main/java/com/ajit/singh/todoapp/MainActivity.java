@@ -2,6 +2,7 @@ package com.ajit.singh.todoapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
@@ -12,7 +13,7 @@ import com.ajit.singh.todoapp.model.Task;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +21,13 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
 
     fetchTasks();
+
+    FloatingActionButton addTaskButton = (FloatingActionButton) findViewById(R.id.add_task);
+    addTaskButton.setOnClickListener(this);
   }
 
-  public void addTask(View view) {
+  @Override
+  public void onClick(View view) {
     startActivityForResult(new Intent(this, AddTaskActivity.class), AddTaskActivity.ADD_TASK_REQ);
   }
 
