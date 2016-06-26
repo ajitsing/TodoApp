@@ -15,7 +15,11 @@ import java.util.List;
 public class TasksAdapter extends BaseAdapter {
   private List<Task> tasks;
 
-  public TasksAdapter(List<Task> tasks) {
+  public static TasksAdapter newInstance(List<Task> tasks) {
+    return new TasksAdapter(tasks);
+  }
+
+  private TasksAdapter(List<Task> tasks) {
     this.tasks = tasks;
   }
 

@@ -3,6 +3,7 @@ package com.ajit.singh.todoapp.presenter;
 import com.ajit.singh.todoapp.actions.MainActions;
 import com.ajit.singh.todoapp.database.repository.TaskRepository;
 import com.ajit.singh.todoapp.model.Task;
+import com.ajit.singh.todoapp.viewmodel.TaskListViewModel;
 
 import java.util.List;
 
@@ -15,9 +16,9 @@ public class MainPresenter {
     this.actions = actions;
   }
 
-  public void onCreate() {
+  public void onCreate(TaskListViewModel viewModel) {
     List<Task> tasks = repository.getTasks();
-    actions.renderTasks(tasks);
+    viewModel.populate(tasks);
   }
 
   public void onAddTask() {
