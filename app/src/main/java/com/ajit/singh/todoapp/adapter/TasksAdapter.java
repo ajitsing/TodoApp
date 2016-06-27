@@ -1,12 +1,13 @@
 package com.ajit.singh.todoapp.adapter;
 
+import android.databinding.DataBindingUtil;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 import com.ajit.singh.todoapp.R;
+import com.ajit.singh.todoapp.databinding.TaskBinding;
 import com.ajit.singh.todoapp.model.Task;
 
 import java.util.List;
@@ -35,20 +36,16 @@ public class TasksAdapter extends BaseAdapter {
 
   @Override
   public View getView(int position, View view, ViewGroup viewGroup) {
-    View taskView = view;
+    TaskBinding binding;
+
     if (view == null) {
       LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-      taskView = inflater.inflate(R.layout.task, viewGroup, false);
+      binding = DataBindingUtil.inflate(inflater, R.layout.task, viewGroup, false);
+    } else {
+      binding = DataBindingUtil.getBinding(view);
     }
 
-    TextView taskTitle = (TextView) taskView.findViewById(R.id.task_title);
-    TextView taskDescription = (TextView) taskView.findViewById(R.id.task_description);
-    TextView creationDate = (TextView) taskView.findViewById(R.id.creation_date);
-
-    Task task = tasks.get(position);
-    taskTitle.setText(task.getTitle());
-    taskDescription.setText(task.getDescription());
-    creationDate.setText(task.getCreationDate());
-    return taskView;
+    binding.setTask(tasks.get(position));
+    return binding.getRoot();
   }
 }
